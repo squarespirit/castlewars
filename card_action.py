@@ -24,7 +24,7 @@ class CardAction():
         pass
 
 
-class ResourceChange():
+class ResourceChange(CardAction):
     def __init__(self, resource, amount, is_on_player):
         """
         Construct a resource change.
@@ -45,7 +45,7 @@ class ResourceChange():
             opponent.change_resource(self.resource, self.amount)
 
 
-class ResourceTransfer():
+class ResourceTransfer(CardAction):
     def __init__(self, resource, amount):
         """
         Construct a resource transfer action in favor of the card player.
@@ -62,5 +62,6 @@ class ResourceTransfer():
         # Move 'transfer_amount' stocks from opponent to player
         opponent.change_resource(self.resource, -transfer_amount)
         player.change_resource(self.resource, transfer_amount)
+
 
 
