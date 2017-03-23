@@ -64,4 +64,15 @@ class ResourceTransfer(CardAction):
         player.change_resource(self.resource, transfer_amount)
 
 
+class Attack(CardAction):
+    def __init__(self, amount):
+        """
+        Construct an attack action.
+        :param amount: Positive integer amount to attack.
+        """
+        assert self.amount >= 1
+        self.amount = amount
 
+    def _play(self, player, opponent):
+        """Do the attack."""
+        opponent.attacked(self.amount)
