@@ -4,25 +4,22 @@ from abc import abstractmethod
 class CardAction():
     def play(self, you, opponent, is_by_you):
         """
-        Carry out the card.
+        Carry out the card action.
         :param you: The Player representing you.
         :param opponent: The Player representing your opponent.
         :param is_by_you: True if the card was played by you.
-        :return: True if the card was able to be played.
         """
         if is_by_you:
-            return self._play(you, opponent)
+            self._play(you, opponent)
         else:
-            return self._play(opponent, you)
+            self._play(opponent, you)
 
     @abstractmethod
     def _play(self, player, opponent):
         """
-        Carry out the card's cost and actions.
+        Carry out the card action.
         :param player: Player who played the card.
         :param opponent: Player's opponent.
-        :return: True if the player was able to play the card.
-            (False if the player couldn't afford it.)
         """
         pass
 
