@@ -2,24 +2,12 @@ from abc import abstractmethod
 
 
 class CardAction():
-    def play(self, you, opponent, is_by_you):
-        """
-        Carry out the card action.
-        :param you: The Player representing you.
-        :param opponent: The Player representing your opponent.
-        :param is_by_you: True if the card was played by you.
-        """
-        if is_by_you:
-            self._play(you, opponent)
-        else:
-            self._play(opponent, you)
-
     @abstractmethod
-    def _play(self, player, opponent):
+    def do(self, player, opponent):
         """
-        Carry out the card action.
+        Do the card action, from the perspective of the card player.
         :param player: Player who played the card.
-        :param opponent: Player's opponent.
+        :param opponent: Their opponent.
         """
         pass
 
@@ -37,8 +25,8 @@ class ResourceChange(CardAction):
         self.amount = amount
         self.is_on_player = is_on_player
 
-    def _play(self, player, opponent):
-        """Apply the resource change."""
+    def do(self, player, opponent):
+        """Do the resource change."""
         if self.is_on_player:
             player.change_resource(self.resource, self.amount)
         else:
@@ -56,8 +44,8 @@ class ResourceTransfer(CardAction):
         assert self.amount >= 1
         self.amount = amount
 
-    def _play(self, player, opponent):
-        """Apply the resource transfer."""
+    def do(self, player, opponent):
+        """Transfer the resource."""
         transfer_amount = min(opponent.resources[self.resource], self.amount)
         # Move 'transfer_amount' stocks from opponent to player
         opponent.change_resource(self.resource, -transfer_amount)
@@ -73,6 +61,6 @@ class Attack(CardAction):
         assert self.amount >= 1
         self.amount = amount
 
-    def _play(self, player, opponent):
+    def do(self, player, opponent):
         """Do the attack."""
         opponent.attacked(self.amount)
