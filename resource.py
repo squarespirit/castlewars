@@ -1,11 +1,11 @@
-from enum import Enum
-
-class Resource(str):
-    def __init__(self, char):
-        """
-        Construct a new Resource as a one-character string.
-        :param char:
-        """
-        assert len(char) == 1
-        super(char)
-
+# resource_long[res] = long name of resource
+resource_long = {
+    'B': 'builders',
+    'b': 'bricks',
+    'S': 'soldiers',
+    'w': 'weapons',
+    'M': 'mages',
+    'c': 'crystals',
+    'C': 'castle',
+    'F': 'fence'
+}
