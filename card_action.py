@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from resource import *
 
 
 class CardAction():
@@ -11,26 +12,40 @@ class CardAction():
         """
         pass
 
+    @abstractmethod
+    def __str__(self):
+        """
+        :return: A string representing the card action. Words, including
+            the first word, should be lowercase."""
+        pass
+
 
 class ResourceChange(CardAction):
-    def __init__(self, resource, amount, is_on_player):
+    def __init__(self, resource, amount, is_for_player):
         """
         Construct a resource change.
         :param resource: Resource to be changed.
         :param amount: Integer amount by which to change resource.
-        :param is_on_player: True if the change is applied to the player who
-            played the card (that caused this resource change).
+        :param is_for_player: True if the change is applied to the player.
+            (False if the change is applied to the opponent.)
         """
         self.resource = resource
         self.amount = amount
-        self.is_on_player = is_on_player
+        self.is_for_player = is_for_player
 
     def do(self, player, opponent):
         """Do the resource change."""
-        if self.is_on_player:
+        if self.is_for_player:
             player.change_resource(self.resource, self.amount)
         else:
             opponent.change_resource(self.resource, self.amount)
+
+    def __str__(self):
+        if self.is_for_player:
+            return '{} {:+d}'.format(resource_long[self.resource], self.amount)
+        else:
+            return 'enemy {} {:+d}'.format(
+                resource_long[self.resource], self.amount)
 
 
 class ResourceTransfer(CardAction):
@@ -51,6 +66,10 @@ class ResourceTransfer(CardAction):
         opponent.change_resource(self.resource, -transfer_amount)
         player.change_resource(self.resource, transfer_amount)
 
+    def __str__(self):
+        return 'transfer {} {}'.format(
+            resource_long[self.resource], self.amount)
+
 
 class Attack(CardAction):
     def __init__(self, amount):
@@ -64,3 +83,6 @@ class Attack(CardAction):
     def do(self, player, opponent):
         """Do the attack."""
         opponent.attacked(self.amount)
+
+    def __str__(self):
+        return 'attack {}'.format(self.amount)
