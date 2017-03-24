@@ -63,7 +63,7 @@ class ResourceTransfer(CardAction):
         """Transfer the resource."""
         transfer_amount = min(opponent.resources[self.resource], self.amount)
         # Move 'transfer_amount' stocks from opponent to player
-        opponent.change_resource(self.resource, -transfer_amount)
+        opponent.lose_resource(self.resource, transfer_amount)
         player.change_resource(self.resource, transfer_amount)
 
     def __str__(self):
