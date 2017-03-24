@@ -1,4 +1,4 @@
-class Player():
+class Player:
     def __init__(self, resources):
         """
         Construct a new player with starting resources.

@@ -2,7 +2,7 @@ from abc import abstractmethod
 from resource import *
 
 
-class CardAction():
+class CardAction:
     @abstractmethod
     def do(self, player, opponent):
         """

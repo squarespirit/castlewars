@@ -4,7 +4,7 @@ from player import *
 from resource import *
 
 
-class Card():
+class Card:
     def __init__(self, name: str, cost_resource: str, cost_amount: int,
                  actions: List[CardAction], description: str = None):
         """
