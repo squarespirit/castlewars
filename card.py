@@ -45,7 +45,7 @@ class Card:
             is not playable.
         """
         # Can't afford
-        if player[self.cost_resource] < self.cost_amount:
+        if player.resources[self.cost_resource] < self.cost_amount:
             return False
 
         player.lose_resource(self.cost_resource, self.cost_amount)
