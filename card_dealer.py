@@ -50,7 +50,7 @@ def read_cards(filename: str) -> CardDealer:
                 continue
 
             # Assume it's card data. Read and strip next 4 lines.
-            name = line
+            name = line.title()
             weight = int(next(f).strip())
             cost_line = next(f).strip()
             actions_line = next(f).strip()
