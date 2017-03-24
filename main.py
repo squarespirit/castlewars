@@ -45,9 +45,9 @@ def won(player1: Player, player2: Player) -> Player:
     # Win when your castle is at least this much
     CASTLE_WIN = 100
 
-    if player1.resources['c'] >= CASTLE_WIN or player2.resources['c'] <= 0:
+    if player1.resources['C'] >= CASTLE_WIN or player2.resources['C'] <= 0:
         return player1
-    elif player2.resources['c'] >= CASTLE_WIN or player1.resources['c'] <= 0:
+    elif player2.resources['C'] >= CASTLE_WIN or player1.resources['C'] <= 0:
         return player2
 
     return None
@@ -175,7 +175,7 @@ def main():
             while True:
                 try:
                     if result.startswith('d'):  # Discard turn
-                        if not re.match('[0-' + str(HAND_SIZE - 1) + ']{1,3}', result[1:]):
+                        if not re.match('^[0-' + str(HAND_SIZE - 1) + ']{1,3}$', result[1:]):
                             raise InputException('That doesn\'t make sense.')
                         if not is_unique(result[1:]):
                             raise InputException('Discarded cards must be unique.')
@@ -263,6 +263,8 @@ def main():
         else:
             grow_resources(opponent)
 
+    print_castle_stats(you, opponent)
+    print()
 
     if won(you, opponent) == you:
         print('Congratulations, you won!')
@@ -271,9 +273,5 @@ def main():
     print()
     input('Press enter to exit. ')
 
-# dealer = read_cards('cards.txt')
-# for i in range(10):
-#     card = dealer.deal()
-#     print('{}) {:18} {:13} {}'.format(i, card.name, card.cost_string(), card.action_string().capitalize()))
 
 main()
