@@ -22,6 +22,13 @@ class Card:
         self.actions = actions
         self.description = description
 
+    def can_be_played(self, player: Player) -> bool:
+        """
+        :param player: A player.
+        :return: True if that player can play this card.
+        """
+        return player.resources[self.cost_resource] >= self.cost_amount
+
     def play(self, you: Player, opponent: Player, is_by_you: bool) -> bool:
         """
         Play the card, from your perspective.
@@ -45,7 +52,7 @@ class Card:
             is not playable.
         """
         # Can't afford
-        if player.resources[self.cost_resource] < self.cost_amount:
+        if not self.can_be_played(player):
             return False
 
         player.lose_resource(self.cost_resource, self.cost_amount)
@@ -68,3 +75,10 @@ class Card:
         if self.description:
             return self.description
         return ', '.join(map(str, self.actions))
+
+    def __str__(self) -> str:
+        """
+        :return: String representation.
+        """
+        return '{} ({}; {})'.format(self.name.title(), self.cost_string(),
+                                    self.action_string())
