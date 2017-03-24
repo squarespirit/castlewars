@@ -1,6 +1,8 @@
 from typing import List
 from card_action import *
 from player import *
+from resource import *
+
 
 class Card():
     def __init__(self, name: str, cost_resource: str, cost_amount: int,
@@ -49,3 +51,19 @@ class Card():
         player.lose_resource(self.cost_resource, self.cost_amount)
         for action in self.actions:
             action.do(player, opponent)
+
+    def cost_string(self):
+        """
+        :return: String representing card resource cost and amount.
+        """
+        return '{} {}'.format(self.cost_amount,
+                              resource_long[self.cost_resource])
+
+    def action_string(self):
+        """
+        :return: Card description if it had one; else use the card actions to
+            generate a description.
+        """
+        if self.description:
+            return self.description
+        return ', '.join(map(str, self.actions))
