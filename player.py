@@ -2,9 +2,10 @@ class Player:
     def __init__(self, resources):
         """
         Construct a new player with starting resources.
-        :param resources: Resource -> starting amount dictionary.
+        :param resources: Resource -> starting amount dictionary. The player
+            makes a private copy of the given dictionary.
         """
-        self.resources = resources
+        self.resources = dict(resources)
 
     def change_resource(self, resource, amount):
         """
@@ -12,7 +13,7 @@ class Player:
         :param resource: Resource to change.
         :param amount: Integer amount.
         """
-        self.resources[resource] = min(0, self.resources[resource] + amount)
+        self.resources[resource] = max(0, self.resources[resource] + amount)
 
     def lose_resource(self, resource, amount):
         """
