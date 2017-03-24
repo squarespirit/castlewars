@@ -19,8 +19,8 @@ class CardTurn(PlayerTurn):
 class DiscardTurn(PlayerTurn):
     """Represents that a player discarded some cards on their turn."""
 
-    def __init__(self, discards: Card):
+    def __init__(self, cards: List[Card]):
         """
-        :param discards: List of discarded cards.
+        :param cards: List of discarded cards.
         """
-        self.discards = discards
+        self.cards = cards
