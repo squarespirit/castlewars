@@ -1,10 +1,10 @@
 # Resources:
-# b - bricks
 # B - builders
-# w - weapons
+# b - bricks
 # S - soldiers
-# c - crystal
+# w - weapons
 # M - mages
+# c - crystal
 # C - castle
 # F - fence
 
@@ -61,7 +61,7 @@ C+8 oC-4
 Fence
 3
 b12
-f+22
+F+22
 
 Fort
 3
@@ -97,7 +97,7 @@ at6
 Recruit
 3
 w8
-sS+1
+S+1
 
 Catapult
 3

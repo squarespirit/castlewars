@@ -56,7 +56,7 @@ class ResourceTransfer(CardAction):
         :param amount: Positive integer amount; transfer at most this amount.
         """
         self.resource = resource
-        assert self.amount >= 1
+        assert amount >= 1
         self.amount = amount
 
     def do(self, player, opponent):
@@ -77,7 +77,7 @@ class Attack(CardAction):
         Construct an attack action.
         :param amount: Positive integer amount to attack.
         """
-        assert self.amount >= 1
+        assert amount >= 1
         self.amount = amount
 
     def do(self, player, opponent):
