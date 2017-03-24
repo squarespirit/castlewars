@@ -22,7 +22,7 @@ class Card:
         self.actions = actions
         self.description = description
 
-    def play(self, you: Player, opponent: Player, is_by_you: bool):
+    def play(self, you: Player, opponent: Player, is_by_you: bool) -> bool:
         """
         Play the card, from your perspective.
         :param you: Player representing you.
@@ -32,11 +32,11 @@ class Card:
             is not playable.
         """
         if is_by_you:
-            self._play(you, opponent)
+            return self._play(you, opponent)
         else:
-            self._play(opponent, you)
+            return self._play(opponent, you)
 
-    def _play(self, player: Player, opponent: Player):
+    def _play(self, player: Player, opponent: Player) -> bool:
         """
         Play the card, from the card player's perspective.
         :param player: Player who played the card.
@@ -51,15 +51,16 @@ class Card:
         player.lose_resource(self.cost_resource, self.cost_amount)
         for action in self.actions:
             action.do(player, opponent)
+        return True
 
-    def cost_string(self):
+    def cost_string(self) -> str:
         """
         :return: String representing card resource cost and amount.
         """
         return '{} {}'.format(self.cost_amount,
                               resource_long[self.cost_resource])
 
-    def action_string(self):
+    def action_string(self) -> str:
         """
         :return: Card description if it had one; else use the card actions to
             generate a description.
